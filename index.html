@@ -1,0 +1,38 @@
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>ReactCalculator</title>
+
+		<script type="text/javascript" src="js/react.js"></script>
+		<script type="text/javascript" src="js/react-dom.js"></script>
+		<script type="text/javascript" src="js/browser.min.js"></script>
+	</head>
+	<body>
+		<div id="app"></div>
+		<script type="text/babel">
+			var CompDisplay = React.createClass({
+				add: function(){
+					alert('Adding numbers');
+				},
+				remove: function(){
+					alert('Removing numbers');	
+				},
+				render: function() {
+					return (
+							<div>
+								<h1>{this.props.text}</h1>
+								<button onClick={this.add} className='addButton'></button>
+								<button onClick={this.remove} className='addButton'></button>
+							</div>
+						);
+				}  
+			}); 
+			ReactDOM.render(
+				<div>
+					<CompDisplay text="This is my Display" />
+				</div>
+				, document.getElementById('app'));
+		</script>
+	</body>
+</html>
