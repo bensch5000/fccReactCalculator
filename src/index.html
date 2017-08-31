@@ -1,0 +1,50 @@
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>ReactCalculator</title>
+
+		<link rel="stylesheet" href="css/styles.css">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		<script type="text/javascript" src="js/react.js"></script>
+		<script type="text/javascript" src="js/react-dom.js"></script>
+		<script type="text/javascript" src="js/browser.min.js"></script>
+		<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	</head>
+	<body>
+		<div id="app" class="app-container"></div>
+
+		<script type="text/babel">
+			var Calculator = React.createClass({
+				render: function(){
+					var buttons = [];
+						{
+							for (var i=9;i>=0;i--) buttons.push(<button key={i} value={i} ref='number' className='btn btn-default'><span>{i}</span></button>);
+							buttons.push(<button key='comma' value=',' className='btn btn-default'><span>,</span></button>)
+						}
+					var operand = ['+','-','x','÷'].map(function(operand){
+						return <button key={operand} value={operand} className='btn btn-primary'><span>{operand}</span></button>
+					});
+					return (
+						<div>
+							<div id='display' className='c-display'>
+								<textarea name="cur" id="current" cols="30" rows="2" readOnly className='form-control'></textarea>
+								<textarea name="recent" id="recent" cols="30" rows="1" readOnly className='form-control'></textarea>
+							</div>
+							<div id='control' className='c-control'>
+								<div id='numbers' className='c-numbers'>
+									{buttons}
+									<button key='Equal' className='btn btn-warning'><span>=</span></button>
+								</div>
+								<div id='operands' className='c-operand'>
+									<button key='AC' className='btn btn-danger'><span>AC</span></button>
+									{operand}
+								</div>
+							</div>
+						</div>);
+				}
+			});
+			ReactDOM.render(<Calculator />, document.getElementById('app'));
+		</script>
+	</body>
+</html>
