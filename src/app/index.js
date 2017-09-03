@@ -1,33 +1,86 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
+var {EventEmitter} = require('fbemitter');
+var ee = new EventEmitter();
 
-var Calculator = React.createClass({
-    render: function(){
-        var buttons = [];
-            {
-                for (var i=9;i>=0;i--) buttons.push(<button key={i} value={i} ref='number' className='btn btn-default'><span>{i}</span></button>);
-                buttons.push(<button key='comma' value=',' className='btn btn-default'><span>,</span></button>)
-            }
-        var operand = ['+','-','x','÷'].map(function(operand){
-            return <button key={operand} value={operand} className='btn btn-primary'><span>{operand}</span></button>
-        });
-        return (
+class App extends React.Component {
+    render() {
+        return( 
             <div>
-                <div id='display' className='c-display'>
-                    <textarea name="cur" id="current" cols="30" rows="2" readOnly className='form-control'></textarea>
-                    <textarea name="recent" id="recent" cols="30" rows="1" readOnly className='form-control'></textarea>
-                </div>
-                <div id='control' className='c-control'>
-                    <div id='numbers' className='c-numbers'>
-                        {buttons}
-                        <button key='Equal' className='btn btn-warning'><span>=</span></button>
-                    </div>
-                    <div id='operands' className='c-operand'>
-                        <button key='AC' className='btn btn-danger'><span>AC</span></button>
-                        {operand}
-                    </div>
-                </div>
-            </div>);
+                <main>
+                    <DisplayField />
+                    <ButtonNumber />
+                    <ButtonOperand />
+                </main>
+            </div>
+        )
     }
-});
-ReactDOM.render(<Calculator />, document.getElementById('app'));
+}
+
+
+
+class DisplayField extends React.Component {
+    constructor(props){
+        super(props)
+
+        this.state = {
+            text: 0
+        }
+    }
+    _updateDisplay(text){
+        this.setState(text);
+    }
+    componentWillMount(){
+        ee.addListener('input',this._updateDisplay);
+    }
+    render(){
+        return (
+            <section className='section--display'>
+                <div id='upperLine'>{this.props.text}</div>
+                <div id='lowerLine'></div>
+            </section>
+        )
+    }
+
+}
+class Button extends React.Component {
+    _handleInput(){
+        let text = this.props.text;
+        let cb = this.props.clickHandler; 
+    if (cb) cb.call(null, text);
+    }
+    render() {
+        return(
+            <button className={this.props.klass} onClick={this.props._handleInput}><span>{this.props.text}</span></button>
+        )
+    }
+}
+class ButtonNumber extends React.Component {
+    _number(){
+        ee.emit('input', this.props.text);
+        console.log(this.prop.text);
+    }
+    render(){
+        var nb = [9,8,7,6,5,4,3,2,1,0,','].map(number =>
+            <Button text={number} clickHandler={this._number} key={number}/>     
+        )  
+        return (
+        <section className='section--numbers'>
+            {nb}
+        </section>
+        );
+    }
+}
+class ButtonOperand extends React.Component {
+    render(){
+        var operand = ['+','-','x','÷'].map(operand =>
+            <Button text={operand} clickHandler={this._calc} key={'op-'+operand} />
+       );
+       return (
+        <section className='section--operands'>
+            {operand}
+        </section>
+        );
+    }
+}
+ReactDOM.render(<App />, document.getElementById('app'));
