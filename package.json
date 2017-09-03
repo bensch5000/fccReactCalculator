@@ -4,7 +4,9 @@
   "description": "A calculator app with ReactJS",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "npm run build",
+    "build": "webpack -d && cp src/index.html dist/index.html && webpack-dev-server --content-base src/ --inline --hot",
+    "build:prod": "webpack -p && cp src/index.html dist/index.html"
   },
   "repository": {
     "type": "git",
@@ -21,6 +23,8 @@
   },
   "homepage": "https://github.com/bensch5000/fccReactCalculator#readme",
   "dependencies": {
+    "babel-core": "^6.26.0",
+    "babel-preset-es2016": "^6.24.1",
     "react": "^15.6.1",
     "react-dom": "^15.6.1"
   },
