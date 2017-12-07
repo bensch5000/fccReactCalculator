@@ -1,71 +1,100 @@
-body {
-    background: #f5f6f6; /* Old browsers */
-    background: -moz-linear-gradient(top, #f5f6f6 0%, #dbdce2 21%, #b8bac6 49%, #dddfe3 80%, #f5f6f6 100%); /* FF3.6-15 */
-    background: -webkit-linear-gradient(top, #f5f6f6 0%,#dbdce2 21%,#b8bac6 49%,#dddfe3 80%,#f5f6f6 100%); /* Chrome10-25,Safari5.1-6 */
-    background: linear-gradient(to bottom, #f5f6f6 0%,#dbdce2 21%,#b8bac6 49%,#dddfe3 80%,#f5f6f6 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f5f6f6', endColorstr='#f5f6f6',GradientType=0 ); /* IE6-9 */
-    font-family: Arial, Helvetica, sans-serif;    
+@import url('https://fonts.googleapis.com/css?family=Muli');
+
+html, body { margin: 0; padding: 0; font-family:  'Muli', sans-serif;}
+@media only screen and (max-width: 680px) {
+  .wrapper {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 3fr;
+    grid-column-gap: 1px;
+    background-color: black;
+  }
 }
-button {
-    cursor: pointer;
-    -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, .15), 0 1px 3px rgba(0, 0, 0, 0.9);
-    -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, .15), 0 1px 3px rgba(0, 0, 0, 0.9);
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, .15), 0 1px 3px rgba(0, 0, 0, 0.9);
-    border-radius: 3px;
+@media only screen and (min-width: 680px) {
+  .app-container {
+    display: grid; 
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 1fr 10fr 1fr;;
+  }
+  .wrapper {
+    grid-row-start: 2;
+    grid-row-end: 3;
+    grid-column-start: 2;
+    grid-column-end: 3;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 3fr;    
+    grid-column-gap: 1px;
+    background-color: black;
+  }
 }
-button:hover{
-    -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, .25), 0 1px 3px rgba(0, 0, 0, 0.8);
-    -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, .25), 0 1px 3px rgba(0, 0, 0, 0.8);
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, .25), 0 1px 3px rgba(0, 0, 0, 0.8);
-    border-radius: 3px;
+.display {
+  display: grid;
+  grid-template-rows: 2fr 1fr;
+  color: rgb(245, 239, 239);
+  background: rgb(167, 165, 165);
+  border-radius: 2% 2% 0% 0%;
+  text-align: right;
+  padding: 5px 5px;
 }
-.app-container {
-    width: 75%;
-    height: 45%;
-    margin: auto;
+/* NEEDS REVIEW */
+.display-main {
+  font-weight: 100;
+  font-size: 1.75em;
 }
-.section--display {
-    height: auto;
-    width: auto;
-    background-color: gray;
-    text-align: right;
-    padding: 2px 4px 2px 4px;
-    color: white;
-    font-size: 18px;
+.display-secondary {
+  font-weight: 100;
+  font-size: 1.25em;
 }
-.section--display :nth-child(1) {
-    height: 60%;
+
+.controls {
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  grid-auto-rows: minmax(100px, auto);    
 }
-.section--display :nth-child(2) {
-    height: auto;
+.input {
+  display: grid; 
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: minmax(100px, auto);  
 }
-.section--numbers {
-    display: inline-block;
-    width: 75%;
+.input > div:nth-child(13) {
+  grid-column-start: 1;
+  grid-column-end: 3;
 }
-.section--numbers > button {
-    color: black;
-    background-color: gainsboro;
-    width: 33.3%;
-    height: 25%;
+.btn-funct {
+  box-sizing: border-box;  
+  width: 100%;
+  height: 100px;  
+  background: rgb(226, 223, 223);
+  color: rgb(146, 145, 145);
+  font-weight: light;
+  text-align: center;
+  border: solid white 1px 0px 0px 1px;
+  border-radius: 0;
+  padding: 0;
 }
-.section--operands{
-    display: inline-block;
-    width: 25%;   
+.btn-digit {
+  box-sizing: border-box;  
+  width: 100%;
+  height: 100px;  
+  background: rgb(233, 230, 230);
+  color: rgb(146, 145, 145);
+  font-weight: light;
+  text-align: center;
+  border: solid white 1px 0px 0px 1px;
+  border-radius: 0;
+  padding: 0;
 }
-.section--operands > button {
-    color: black;
-    background-color: #90AFFD;
-    width: 100%;
-    height: 25%;
-}
-.section--control{
-    display: inline-block;
-    width: 100%;   
-}
-.section--control > button {
-    color: black;
-    background-color: #D82C2E;
-    width: 100%;
-    height: 25%;
+
+.btn-operator {
+  box-sizing: border-box;  
+  width: 100%;
+  height: 100px;  
+  background: rgb(250, 137, 72);
+  color: rgb(252, 252, 252);
+  font-weight: light;
+  text-align: center;
+  border: solid white 1px 0px 0px 1px;
+  border-radius: 0;
+  padding: 0;
 }
