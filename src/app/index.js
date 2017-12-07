@@ -29,7 +29,6 @@ class Calculator extends React.Component {
             displayValue: '',
             inMemoryValue: '',
             operandPressed: null,
-            errorDisplay: false         
         }
     }
     calculate() {
@@ -42,7 +41,6 @@ class Calculator extends React.Component {
         });
         }
     }
-    //When the user clicks a digit button
     handleInput(i) {
         if (this.state.operandPressed) this.setState({
             inMemoryValue: this.state.inMemoryValue+this.state.displayValue,
@@ -53,7 +51,6 @@ class Calculator extends React.Component {
             displayValue: this.state.displayValue.toLocaleString()+i, 
         })
     }
-    //when the user clicks an operator button
     handleOperator(o){
         if (/\d/.test(this.state.displayValue)) {
             //support missing 0 values (eg .0123) TO DO 
@@ -65,7 +62,6 @@ class Calculator extends React.Component {
         } else if (/[\+\-\/\*]/.test(this.state.displayValue)) this.setState({displayValue:o})
 
     }
-    //When the user clicks AC, clear the display value and remembered value
     clearDisplay() {
         this.setState({
             value: 0,
@@ -73,10 +69,8 @@ class Calculator extends React.Component {
             inMemoryValue: '',
             operandPressed: null,
             operandAwaiting: true,
-            errorDisplay: false
         })
     }
-    //when the user clicks backspace, clear the last entered value from current value
     clearLastInput(){
         if(this.state.displayValue){
             let newValue = this.state.displayValue.slice(0,this.state.displayValue.toString.length-1);
@@ -86,21 +80,18 @@ class Calculator extends React.Component {
             }) 
         }
     }
-    //When the user clicks ± to toggle the sign
     toggleSign() {
         let newValue = parseFloat(this.state.displayValue)*-1;
         this.setState({
             displayValue: newValue
         })
     }
-    //When the user clicks % to convert to percentage
     turnPerc(){
         let newValue = parseFloat(this.state.displayValue)/100;
         this.setState({
             displayValue: newValue
         })
     }
-    //Enable Keyboard inputs
     handleKeyPressed = (e) => {
         let {key} = e;
         switch(key) {
