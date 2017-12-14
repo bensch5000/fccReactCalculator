@@ -39,3 +39,4 @@ Thumbs.db
 #FOLDER#
 /.vscode
 /.node_modules
+/.dist

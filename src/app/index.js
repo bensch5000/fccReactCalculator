@@ -161,4 +161,3 @@ class Calculator extends React.Component {
     }
 }
 ReactDOM.render(<Calculator />, document.getElementById('app'));
-
